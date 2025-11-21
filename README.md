@@ -11,20 +11,20 @@ This is a GRIT Coding Challenge ReactSPA project that allows users to track symb
 
 ## Setup
 
-_1. Clone the repository_
+**1. Clone the repository**
 
 ```
 git clone https://github.com/ChawankornT/us-stock-etf.git
 cd us-stock-etf
 ```
 
-_2. Install dependencies_
+**2. Install dependencies**
 
 ```
 npm install
 ```
 
-_3. Setup environment_
+**3. Setup environment**
 
 Copy the example environment file:
 
@@ -34,8 +34,16 @@ cp .env.local.example .env.local
 
 Update `.env.local` with your Alpaca API credentials.
 
-_4. Run the application_
+**4. Run the application**
+
+Run application:
 
 ```
 npm run dev
+```
+
+Or run test:
+
+```
+npm run test
 ```
