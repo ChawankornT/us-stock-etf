@@ -1,10 +1,24 @@
+import React from "react";
 import { useState, useContext, createContext } from "react";
 
-const SymbolContext = createContext<any>(undefined);
+interface ContextType {
+  symbolList: string[];
+  prices: {};
+  addSymbol: (symbol: string) => void;
+  editSymbol: (oldSymbol: string, newSymbol: string) => void;
+  removeSymbol: (symbol: string) => void;
+  updatePrice: (symbol: string, price: string, timestamp: string) => void;
+}
 
-export const useSymbolContext = () => useContext(SymbolContext);
+const SymbolContext = createContext<ContextType | undefined>(undefined);
 
-export function SymbolProvider({ children }: any) {
+export const useSymbolContext = () => {
+  const context = useContext(SymbolContext);
+  if (!context) throw new Error("useSymbolContext is not in SymbolProvider");
+  return context;
+};
+
+export function SymbolProvider({ children }: { children: React.ReactNode }) {
   const [symbolList, setSymbolList] = useState<string[]>([]);
   const [prices, setPrices] = useState({});
 
@@ -33,7 +47,7 @@ export function SymbolProvider({ children }: any) {
 
   const updatePrice = (symbol: string, price: string, timestamp: string) => {
     setPrices((prev) => {
-      const prevPrice = prev[symbol]?.price ?? price;
+      const prevPrice = prev[symbol]?.price ?? null;
       return { ...prev, [symbol]: { price, prevPrice, timestamp } };
     });
   };

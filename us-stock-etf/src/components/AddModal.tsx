@@ -117,7 +117,7 @@ export default function AddModal({
                   <div className="flex flex-col space-y-2">
                     <div className="flex">
                       <div className="font-bold mr-2">Symbol:</div>
-                      <div>{symbolData.symbol}</div>
+                      <div data-testid="test-data">{symbolData.symbol}</div>
                     </div>
                     <div className="flex">
                       <div className="font-bold mr-2">Name:</div>

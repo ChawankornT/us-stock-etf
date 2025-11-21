@@ -34,7 +34,9 @@ export default function DataTable() {
         <tbody>
           {symbolList.map((symbol: string) => {
             const data = prices[symbol];
-            const price = data?.price ?? "N/A";
+            const displayPrice = data?.price ?? "N/A";
+            const price = Number(data?.price) ?? 0;
+            const prevPrice = Number(data?.prevPrice) ?? null;
             const updatedTime = data?.timestamp ? data.timestamp : "-";
 
             return (
@@ -42,12 +44,14 @@ export default function DataTable() {
                 <td>{symbol}</td>
                 <td
                   className={
-                    data?.price > data?.prevPrice
-                      ? `text-green-500`
-                      : `text-red-500`
+                    !prevPrice
+                      ? "text-red-500"
+                      : price > prevPrice
+                      ? "text-green-500"
+                      : "text-red-500"
                   }
                 >
-                  {price}
+                  {displayPrice}
                 </td>
                 <td>{formatDateTime(updatedTime)}</td>
                 <td>
